@@ -1,0 +1,9 @@
+[[redirects]]
+  from = "/api/notices"
+  to = "/.netlify/functions/notices"
+  status = 200
+
+[[redirects]]
+  from = "/api/notices/*"
+  to = "/.netlify/functions/notices"
+  status = 200

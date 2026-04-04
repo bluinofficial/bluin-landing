@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공지사항 — BLU'IN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-deep: #0a1628;
+      --blue-ocean: #0d2e5a;
+      --teal: #0bc4c4;
+      --gold: #c8a96e;
+      --white: #ffffff;
+      --off-white: #f4f8fc;
+      --gray: #8fa3b8;
+      --gray-light: #e8eef4;
+      --text-dark: #0d1b2a;
+      --font: 'Noto Sans KR', sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--off-white);
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: 72px;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 22, 40, 0.95);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img { height: 56px; width: auto; filter: brightness(0) invert(1); }
+    .nav-logo-text { font-size: 1.5rem; font-weight: 700; color: var(--white); letter-spacing: 0.04em; }
+
+    main {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 120px 5% 80px;
+    }
+
+    .page-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blue-deep);
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--blue-deep);
+    }
+
+    /* 공지 목록 */
+    .notice-list { display: flex; flex-direction: column; gap: 0; }
+
+    .notice-item {
+      background: var(--white);
+      border: 1px solid var(--gray-light);
+      border-radius: 0;
+      padding: 24px 28px;
+      cursor: pointer;
+      border-bottom: none;
+      transition: background 0.2s;
+    }
+    .notice-item:first-child { border-radius: 12px 12px 0 0; }
+    .notice-item:last-child { border-radius: 0 0 12px 12px; border-bottom: 1px solid var(--gray-light); }
+    .notice-item:only-child { border-radius: 12px; border-bottom: 1px solid var(--gray-light); }
+    .notice-item:hover { background: var(--off-white); }
+
+    .notice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .notice-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .notice-date {
+      font-size: 0.82rem;
+      color: var(--gray);
+      white-space: nowrap;
+    }
+
+    .notice-body {
+      display: none;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--gray-light);
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #2c4057;
+      white-space: pre-wrap;
+    }
+
+    .notice-item.open .notice-body { display: block; }
+
+    .notice-delete {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .notice-delete input {
+      padding: 6px 12px;
+      border: 1px solid var(--gray-light);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      outline: none;
+      width: 160px;
+    }
+
+    .btn-delete {
+      padding: 6px 14px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      font-family: var(--font);
+    }
+
+    .btn-delete:hover { background: #c0392b; }
+
+    /* 빈 상태 */
+    .empty-state {
+      text-align: center;
+      padding: 80px 0;
+      color: var(--gray);
+    }
+    .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
+
+    /* 관리자 패널 */
+    .admin-toggle {
+      margin-top: 48px;
+      text-align: right;
+    }
+
+    .btn-admin {
+      padding: 10px 20px;
+      background: var(--blue-deep);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-family: var(--font);
+      font-weight: 600;
+    }
+
+    .btn-admin:hover { background: var(--blue-ocean); }
+
+    .admin-panel {
+      display: none;
+      margin-top: 20px;
+      background: var(--white);
+      border: 1px solid var(--gray-light);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .admin-panel.open { display: block; }
+
+    .admin-panel h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--blue-deep);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--blue-deep);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      padding: 10px 14px;
+      border: 1px solid var(--gray-light);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: var(--font);
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--teal); }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .btn-submit {
+      padding: 12px 28px;
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--font);
+    }
+
+    .btn-submit:hover { background: #09a8a8; }
+
+    .msg { margin-top: 12px; font-size: 0.88rem; }
+    .msg.error { color: #e74c3c; }
+    .msg.success { color: var(--teal); }
+
+    footer {
+      background: var(--blue-deep);
+      color: var(--gray);
+      text-align: center;
+      padding: 24px 5%;
+      font-size: 0.82rem;
+      margin-top: 60px;
+    }
+    footer a { color: var(--gray); text-decoration: none; }
+    footer a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo/logo.png" alt="BLU'IN 로고">
+    <span class="nav-logo-text">BLU'IN</span>
+  </a>
+</nav>
+
+<main>
+  <div class="page-tag">Notice</div>
+  <h1>공지사항</h1>
+
+  <div class="notice-list" id="noticeList">
+    <div class="empty-state">
+      <div class="icon">📋</div>
+      <p>등록된 공지사항이 없습니다.</p>
+    </div>
+  </div>
+
+  <div class="admin-toggle">
+    <button class="btn-admin" onclick="toggleAdmin()">관리자</button>
+  </div>
+
+  <div class="admin-panel" id="adminPanel">
+    <h2>공지사항 작성</h2>
+    <div class="form-group">
+      <label>관리자 비밀번호</label>
+      <input type="password" id="adminPw" placeholder="비밀번호 입력">
+    </div>
+    <div class="form-group">
+      <label>제목</label>
+      <input type="text" id="noticeTitle" placeholder="공지사항 제목">
+    </div>
+    <div class="form-group">
+      <label>내용</label>
+      <textarea id="noticeContent" placeholder="공지사항 내용을 입력하세요."></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitNotice()">등록하기</button>
+    <div class="msg" id="adminMsg"></div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 BLU'IN. All rights reserved. | <a href="index.html">홈으로 돌아가기</a></p>
+</footer>
+
+<script>
+  async function loadNotices() {
+    const res = await fetch("/api/notices");
+    const notices = await res.json();
+    const list = document.getElementById("noticeList");
+
+    if (notices.length === 0) {
+      list.innerHTML = `<div class="empty-state"><div class="icon">📋</div><p>등록된 공지사항이 없습니다.</p></div>`;
+      return;
+    }
+
+    list.innerHTML = notices.map(n => `
+      <div class="notice-item" id="notice-${n.id}" onclick="toggleNotice(${n.id})">
+        <div class="notice-header">
+          <span class="notice-title">${n.title}</span>
+          <span class="notice-date">${n.date}</span>
+        </div>
+        <div class="notice-body">
+          ${n.content}
+          <div class="notice-delete" onclick="event.stopPropagation()">
+            <input type="password" placeholder="관리자 비밀번호" id="pw-${n.id}">
+            <button class="btn-delete" onclick="deleteNotice(${n.id})">삭제</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function toggleNotice(id) {
+    document.getElementById(`notice-${id}`).classList.toggle("open");
+  }
+
+  function toggleAdmin() {
+    document.getElementById("adminPanel").classList.toggle("open");
+  }
+
+  async function submitNotice() {
+    const password = document.getElementById("adminPw").value;
+    const title = document.getElementById("noticeTitle").value;
+    const content = document.getElementById("noticeContent").value;
+    const msg = document.getElementById("adminMsg");
+
+    const res = await fetch("/api/notices", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password, title, content })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      msg.className = "msg success";
+      msg.textContent = "공지사항이 등록되었습니다.";
+      document.getElementById("noticeTitle").value = "";
+      document.getElementById("noticeContent").value = "";
+      loadNotices();
+    } else {
+      msg.className = "msg error";
+      msg.textContent = data.error;
+    }
+  }
+
+  async function deleteNotice(id) {
+    const password = document.getElementById(`pw-${id}`).value;
+    const res = await fetch(`/api/notices`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password, id })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      loadNotices();
+    } else {
+      alert(data.error);
+    }
+  }
+
+  loadNotices();
+</script>
+
+</body>
+</html>
