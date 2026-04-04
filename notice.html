@@ -307,7 +307,7 @@
 
 <script>
   async function loadNotices() {
-    const res = await fetch("/api/notices");
+    const res = await fetch("/.netlify/functions/notices");
     const notices = await res.json();
     const list = document.getElementById("noticeList");
 
@@ -347,7 +347,7 @@
     const content = document.getElementById("noticeContent").value;
     const msg = document.getElementById("adminMsg");
 
-    const res = await fetch("/api/notices", {
+    const res = await fetch("/.netlify/functions/notices", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password, title, content })
@@ -368,7 +368,7 @@
 
   async function deleteNotice(id) {
     const password = document.getElementById(`pw-${id}`).value;
-    const res = await fetch(`/api/notices`, {
+    const res = await fetch(`/.netlify/functions/notices`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password, id })
