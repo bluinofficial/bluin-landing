@@ -1,35 +1,51 @@
-const { getStore } = require("@netlify/blobs");
+const https = require("https");
 
 const ADMIN_PASSWORD = "qmffndls123";
+const BIN_ID = process.env.JSONBIN_ID;
+const API_KEY = process.env.JSONBIN_KEY;
+
+const headers = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+function jsonbinRequest(method, body) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: "api.jsonbin.io",
+      path: `/v3/b/${BIN_ID}`,
+      method,
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": API_KEY,
+        "X-Bin-Versioning": "false",
+      },
+    };
+    const req = https.request(options, (res) => {
+      let data = "";
+      res.on("data", (chunk) => (data += chunk));
+      res.on("end", () => resolve(JSON.parse(data)));
+    });
+    req.on("error", reject);
+    if (body) req.write(JSON.stringify(body));
+    req.end();
+  });
+}
 
 exports.handler = async (event) => {
-  const store = getStore("notices");
-  const method = event.httpMethod;
-
-  const headers = {
-    "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-  };
-
-  if (method === "OPTIONS") {
+  if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers, body: "" };
   }
 
-  // GET - 공지 목록 조회
-  if (method === "GET") {
-    try {
-      const raw = await store.get("list");
-      const notices = raw ? JSON.parse(raw) : [];
-      return { statusCode: 200, headers, body: JSON.stringify(notices) };
-    } catch {
-      return { statusCode: 200, headers, body: JSON.stringify([]) };
-    }
+  if (event.httpMethod === "GET") {
+    const result = await jsonbinRequest("GET");
+    const notices = result.record?.notices || [];
+    return { statusCode: 200, headers, body: JSON.stringify(notices) };
   }
 
-  // POST - 공지 작성
-  if (method === "POST") {
+  if (event.httpMethod === "POST") {
     const { password, title, content } = JSON.parse(event.body || "{}");
     if (password !== ADMIN_PASSWORD) {
       return { statusCode: 401, headers, body: JSON.stringify({ error: "비밀번호가 틀렸습니다." }) };
@@ -37,23 +53,22 @@ exports.handler = async (event) => {
     if (!title || !content) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: "제목과 내용을 입력해주세요." }) };
     }
-    const raw = await store.get("list").catch(() => null);
-    const notices = raw ? JSON.parse(raw) : [];
+    const result = await jsonbinRequest("GET");
+    const notices = result.record?.notices || [];
     const notice = { id: Date.now(), title, content, date: new Date().toLocaleDateString("ko-KR") };
     notices.unshift(notice);
-    await store.set("list", JSON.stringify(notices));
+    await jsonbinRequest("PUT", { notices });
     return { statusCode: 200, headers, body: JSON.stringify({ success: true, notice }) };
   }
 
-  // DELETE - 공지 삭제
-  if (method === "DELETE") {
+  if (event.httpMethod === "DELETE") {
     const { password, id } = JSON.parse(event.body || "{}");
     if (password !== ADMIN_PASSWORD) {
       return { statusCode: 401, headers, body: JSON.stringify({ error: "비밀번호가 틀렸습니다." }) };
     }
-    const raw = await store.get("list").catch(() => null);
-    const notices = (raw ? JSON.parse(raw) : []).filter(n => n.id !== id);
-    await store.set("list", JSON.stringify(notices));
+    const result = await jsonbinRequest("GET");
+    const notices = (result.record?.notices || []).filter((n) => n.id !== id);
+    await jsonbinRequest("PUT", { notices });
     return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
   }
 
