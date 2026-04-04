@@ -1,9 +1,11 @@
-[[redirects]]
-  from = "/api/notices"
-  to = "/.netlify/functions/notices"
-  status = 200
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
 
 [[redirects]]
-  from = "/api/notices/*"
+  from = "/api/notices"
   to = "/.netlify/functions/notices"
   status = 200
