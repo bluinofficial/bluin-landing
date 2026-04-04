@@ -1,0 +1,2319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLU'IN — Uniting the Waves of Diving</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-deep:   #0a1628;
+      --blue-ocean:  #0d2e5a;
+      --blue-mid:    #1a4a7a;
+      --blue-bright: #1e90c8;
+      --blue-light:  #5bb8e8;
+      --blue-glow:   #7dd3f8;
+      --teal:        #0bc4c4;
+      --gold:        #c8a96e;
+      --gold-light:  #e8d4a0;
+      --white:       #ffffff;
+      --off-white:   #f4f8fc;
+      --gray-light:  #e8eef4;
+      --gray:        #8fa3b8;
+      --text-dark:   #0d1b2a;
+      --text-body:   #2c4057;
+      --font-head: 'Noto Sans KR', sans-serif;
+      --font-body: 'Noto Sans KR', sans-serif;
+      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --shadow-card: 0 20px 60px rgba(10, 22, 40, 0.18);
+      --shadow-hover: 0 32px 80px rgba(10, 22, 40, 0.28);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 { font-weight: 700; }
+    p, span, li, a { font-weight: 400; }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition), backdrop-filter var(--transition);
+    }
+
+    nav.scrolled {
+      background: rgba(10, 22, 40, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--blue-glow); }
+    .nav-links a.nav-partner-highlight {
+      color: var(--gold-light) !important;
+      font-weight: 600 !important;
+    }
+    .nav-links a.nav-partner-highlight:hover { color: var(--gold) !important; }
+
+    .nav-cta {
+      padding: 10px 26px;
+      background: var(--teal);
+      color: var(--white) !important;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      letter-spacing: 0.04em !important;
+      text-transform: none !important;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue-light) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0, 196, 196, 0.36) !important;
+    }
+
+    /* ── OFFICIAL PARTNERSHIP BANNER ── */
+    #partnership-banner {
+      background: linear-gradient(90deg, #0a1628 0%, #0d2e5a 50%, #0a1628 100%);
+      border-top: 1px solid rgba(200,169,110,0.3);
+      border-bottom: 1px solid rgba(200,169,110,0.3);
+      padding: 12px 5%;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--gold-light);
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    #partnership-banner span.banner-badge {
+      background: rgba(200,169,110,0.15);
+      border: 1px solid rgba(200,169,110,0.4);
+      border-radius: 50px;
+      padding: 3px 14px;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── PARTNERSHIP SECTION ── */
+    #partnership {
+      background: var(--off-white);
+      padding: 100px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+    #partnership::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,169,110,0.08), transparent 65%);
+      pointer-events: none;
+    }
+    .partnership-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .partnership-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border: 1px solid rgba(200,169,110,0.5);
+      border-radius: 50px;
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      background: rgba(200,169,110,0.07);
+    }
+    .partnership-badge::before {
+      content: '★';
+      color: var(--gold);
+      font-size: 0.72rem;
+    }
+    .partnership-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .partnership-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .partnership-desc {
+      font-size: 1rem;
+      color: var(--text-body);
+      line-height: 1.9;
+      margin-bottom: 36px;
+    }
+    .partnership-benefits {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+    .partnership-benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: var(--text-body);
+    }
+    .partnership-benefits li .benefit-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(200,169,110,0.12);
+      border: 1px solid rgba(200,169,110,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .partnership-benefits li strong { color: var(--text-dark); }
+    .partnership-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .partnership-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid rgba(200,169,110,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .partnership-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    }
+    .partner-org-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+    }
+    .partner-org-en {
+      font-size: 0.82rem;
+      color: var(--gray);
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+    .partner-org-desc {
+      font-size: 0.92rem;
+      color: var(--text-body);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .partner-org-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .partner-org-tag {
+      padding: 5px 14px;
+      background: rgba(200,169,110,0.1);
+      border: 1px solid rgba(200,169,110,0.25);
+      border-radius: 50px;
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .partnership-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .partnership-stat {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(10,22,40,0.08);
+      border: 1px solid var(--gray-light);
+    }
+    .partnership-stat .stat-num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .partnership-stat .stat-label {
+      font-size: 0.76rem;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+    }
+    @media (max-width: 768px) {
+      .partnership-inner { grid-template-columns: 1fr; gap: 40px; }
+      .partnership-stat-row { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(160deg,
+          rgba(10, 22, 40, 0.90) 0%,
+          rgba(13, 46, 90, 0.75) 40%,
+          rgba(0, 120, 160, 0.55) 80%,
+          rgba(11, 196, 196, 0.25) 100%
+        ),
+        url('https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=800&q=80') center/cover no-repeat;
+    }
+
+    .bubbles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), rgba(125, 211, 248, 0.15));
+      border: 1px solid rgba(255,255,255,0.3);
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.5; }
+      100% { transform: translateY(-110vh) translateX(30px) scale(1.2); opacity: 0; }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 5% 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border: 1px solid rgba(125, 211, 248, 0.5);
+      border-radius: 50px;
+      color: var(--blue-glow);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      backdrop-filter: blur(8px);
+      background: rgba(10, 22, 40, 0.3);
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 8px var(--teal);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero-logo {
+      margin-bottom: 20px;
+      animation: fadeDown 0.9s ease 0.1s both;
+    }
+
+    .hero-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      animation: fadeDown 1s ease 0.2s both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+      color: rgba(255, 255, 255, 0.76);
+      line-height: 2;
+      margin-bottom: 48px;
+      font-weight: 300;
+      animation: fadeDown 1s ease 0.4s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      animation: fadeDown 1s ease 0.55s both;
+    }
+
+    /* iPhone Mockup */
+    .hero-mockup-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeDown 1.1s ease 0.3s both;
+    }
+
+    .iphone-mockup {
+      width: 256px;
+      height: 510px;
+      background: var(--blue-deep);
+      border-radius: 42px;
+      border: 8px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.05),
+        0 40px 80px rgba(0,0,0,0.55),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .iphone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 96px;
+      height: 22px;
+      background: rgba(0,0,0,0.55);
+      border-radius: 12px;
+      z-index: 2;
+    }
+
+    .iphone-screen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(160deg, #0d2e5a, #0a1628);
+    }
+
+    .iphone-screen-header {
+      padding: 48px 16px 12px;
+      background: rgba(11,196,196,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .iphone-screen-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .iphone-screen-sub {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-top: 2px;
+    }
+
+    .iphone-screen-body {
+      flex: 1;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .iphone-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .iphone-card-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(11,196,196,0.3);
+      margin-bottom: 10px;
+    }
+
+    .iphone-card-line {
+      height: 7px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.14);
+      margin-bottom: 6px;
+    }
+
+    .iphone-card-line.short { width: 58%; margin-bottom: 0; }
+
+    .iphone-card-img {
+      height: 48px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(11,196,196,0.2), rgba(30,144,200,0.2));
+      margin-bottom: 8px;
+    }
+
+    .iphone-bottom-bar {
+      padding: 10px 8px;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(10,22,40,0.95);
+    }
+
+    .iphone-tab {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+    }
+
+    .iphone-tab.active { background: rgba(11,196,196,0.2); }
+
+    .iphone-label {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: fadeDown 1s ease 1s both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.5));
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollLine {
+      0%, 100% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+    }
+
+    /* ── APP PREVIEW ── */
+    #app-preview {
+      background: var(--blue-deep);
+      padding: 100px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #app-preview::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(11,196,196,0.07), transparent 65%);
+      pointer-events: none;
+    }
+
+    .app-preview-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .app-preview-text { }
+
+    .app-feature-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .app-feature-list li {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-feature-list li::before {
+      content: '';
+      display: block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .phone-trio {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .phone-wrap { display: flex; flex-direction: column; align-items: center; }
+
+    .phone-frame {
+      width: 200px;
+      background: rgba(13, 46, 90, 0.85);
+      border-radius: 32px;
+      border: 6px solid rgba(255,255,255,0.12);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+      transition: transform var(--transition);
+    }
+
+    .phone-frame:hover { transform: translateY(-8px); }
+
+    .phone-frame.center-phone {
+      width: 224px;
+      transform: translateY(-20px);
+      border-color: rgba(11,196,196,0.45);
+      box-shadow: 0 0 0 1px rgba(11,196,196,0.2), 0 40px 80px rgba(11,196,196,0.15), 0 30px 60px rgba(0,0,0,0.4);
+    }
+
+    .phone-frame.center-phone:hover { transform: translateY(-28px); }
+
+    .phone-notch-bar {
+      height: 20px;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 0;
+    }
+
+    .phone-notch-bar::after {
+      content: '';
+      width: 60px;
+      height: 14px;
+      background: rgba(0,0,0,0.7);
+      border-radius: 0 0 8px 8px;
+    }
+
+    .phone-screen {
+      height: 330px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-screen-header {
+      padding: 14px 14px 10px;
+      background: rgba(11,196,196,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .phone-screen-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .phone-screen-title-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-top: 2px;
+    }
+
+    .phone-screen-body {
+      flex: 1;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: linear-gradient(180deg, rgba(13,46,90,0.9) 0%, rgba(10,22,40,1) 100%);
+      overflow: hidden;
+    }
+
+    .ps-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .ps-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(11,196,196,0.25);
+      flex-shrink: 0;
+    }
+
+    .ps-lines { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+
+    .ps-line {
+      height: 7px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .ps-line.short { width: 55%; }
+
+    .ps-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .ps-card-img {
+      height: 44px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(11,196,196,0.2), rgba(30,144,200,0.2));
+      margin-bottom: 8px;
+    }
+
+    .phone-bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 4px;
+      background: rgba(10,22,40,0.98);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .phone-nav-icon {
+      font-size: 0.85rem;
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+
+    .phone-nav-icon.active { background: rgba(11,196,196,0.18); }
+
+    .phone-label-text {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── VALUE STRIP ── */
+    #value-strip {
+      background: var(--blue-ocean);
+      padding: 0;
+    }
+
+    .value-strip-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .value-card {
+      text-align: center;
+      padding: 48px 24px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      transition: background var(--transition);
+    }
+
+    .value-card:last-child { border-right: none; }
+    .value-card:hover { background: rgba(255,255,255,0.04); }
+
+    .value-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .value-title {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .value-desc {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.42);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SECTION COMMONS ── */
+    .section { padding: 110px 5%; }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--teal);
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+
+    .section-title em { font-style: italic; color: var(--blue-bright); }
+
+    .section-desc {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-body);
+      max-width: 580px;
+    }
+
+    /* ── FEATURES ── */
+    #features { background: var(--white); }
+
+    .features-inner { max-width: 1200px; margin: 0 auto; }
+
+    .features-header { text-align: center; margin-bottom: 72px; }
+    .features-header .section-desc { margin: 0 auto; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .features-grid .feature-card:nth-child(7) { grid-column: 2; }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--gray-light);
+      border-radius: 24px;
+      padding: 40px 36px;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(30, 144, 200, 0.05), transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); border-color: rgba(30, 144, 200, 0.2); }
+    .feature-card:hover::before { opacity: 1; }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+    }
+
+    .feature-card:nth-child(1) .feature-icon { background: rgba(11, 196, 196, 0.12); }
+    .feature-card:nth-child(2) .feature-icon { background: rgba(30, 144, 200, 0.12); }
+    .feature-card:nth-child(3) .feature-icon { background: rgba(200, 169, 110, 0.12); }
+    .feature-card:nth-child(4) .feature-icon { background: rgba(91, 184, 232, 0.12); }
+    .feature-card:nth-child(5) .feature-icon { background: rgba(11, 196, 196, 0.12); }
+    .feature-card:nth-child(6) .feature-icon { background: rgba(30, 144, 200, 0.12); }
+    .feature-card:nth-child(7) .feature-icon { background: rgba(200, 169, 110, 0.12); }
+
+    .feature-title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 12px;
+    }
+
+    .feature-desc { font-size: 0.92rem; line-height: 1.75; color: var(--gray); }
+
+    /* ── HOW IT WORKS ── */
+    #howitworks {
+      background: var(--blue-deep);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #howitworks::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(11,196,196,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    #howitworks::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(30,144,200,0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .howitworks-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .howitworks-header { text-align: center; margin-bottom: 72px; }
+    .howitworks-header .section-title { color: var(--white); }
+    .howitworks-header .section-desc { color: rgba(255,255,255,0.62); margin: 0 auto; }
+
+    .steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 31px;
+      top: 32px; bottom: 32px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--teal), rgba(11, 196, 196, 0.1));
+    }
+
+    .step { display: flex; gap: 32px; align-items: flex-start; padding: 28px 0; }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--blue-ocean);
+      border: 2px solid rgba(11, 196, 196, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--teal);
+      position: relative;
+      z-index: 1;
+      transition: all var(--transition);
+    }
+
+    .step:hover .step-num {
+      background: var(--teal);
+      color: var(--white);
+      border-color: var(--teal);
+      box-shadow: 0 0 24px rgba(11, 196, 196, 0.5);
+    }
+
+    .step-content { padding-top: 12px; }
+
+    .step-title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .step-desc { font-size: 0.92rem; line-height: 1.75; color: rgba(255, 255, 255, 0.55); }
+
+    /* ── PARTNER ── */
+    #partner { background: var(--off-white); }
+
+    .partner-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .partner-types { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px; }
+
+    .partner-type-card {
+      background: var(--white);
+      border: 1px solid var(--gray-light);
+      border-radius: 20px;
+      padding: 24px;
+      transition: all var(--transition);
+    }
+
+    .partner-type-card:hover { border-color: var(--blue-bright); transform: translateY(-4px); box-shadow: var(--shadow-card); }
+
+    .ptype-icon { font-size: 1.8rem; margin-bottom: 12px; display: block; }
+    .ptype-title { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+    .ptype-desc { font-size: 0.8rem; color: var(--gray); line-height: 1.5; }
+
+    .partner-visual { position: relative; }
+
+    .partner-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 40px 4px 40px 4px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .partner-commission {
+      position: absolute;
+      bottom: 30px; left: -30px;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .commission-label { font-size: 0.72rem; color: var(--gray); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+    .commission-rate { font-family: var(--font-head); font-size: 1.8rem; font-weight: 700; color: var(--blue-bright); }
+    .commission-note { font-size: 0.75rem; color: var(--gray); margin-top: 4px; }
+    .commission-promo { margin-top: 10px; padding: 6px 12px; background: rgba(11, 196, 196, 0.1); border-radius: 8px; font-size: 0.78rem; color: var(--teal); font-weight: 600; }
+
+    /* ── DESTINATIONS ── */
+    #destinations { background: var(--white); }
+
+    .destinations-inner { max-width: 1200px; margin: 0 auto; }
+
+    .destinations-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 52px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+
+    .dest-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .dest-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+    .dest-card:first-child { grid-column: span 2; }
+
+    .dest-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .dest-card:first-child .dest-img { aspect-ratio: 16/8; }
+    .dest-card:hover .dest-img { transform: scale(1.06); }
+
+    .dest-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,22,40,0.85) 0%, transparent 55%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px;
+    }
+
+    .dest-region { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+    .dest-name { font-family: var(--font-head); font-size: 1.4rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .dest-card:first-child .dest-name { font-size: 1.8rem; }
+    .dest-count { font-size: 0.82rem; color: rgba(255,255,255,0.65); }
+
+    /* ── DOWNLOAD / BOOKING CTA ── */
+    #booking {
+      background:
+        linear-gradient(135deg,
+          rgba(10, 22, 40, 0.92) 0%,
+          rgba(13, 46, 90, 0.88) 50%,
+          rgba(0, 120, 160, 0.80) 100%
+        ),
+        url('https://images.unsplash.com/photo-1559827291-72ee739d0d9a?w=1800&q=80') center/cover no-repeat;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #booking::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(11,196,196,0.12), transparent 65%);
+    }
+
+    .booking-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
+
+    .booking-inner .section-tag { color: var(--blue-glow); }
+    .booking-inner .section-tag::before { background: var(--blue-glow); }
+
+    .booking-title {
+      font-family: var(--font-head);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .booking-title em { font-style: italic; color: var(--blue-glow); }
+
+    .booking-desc { font-size: 1.05rem; line-height: 1.8; color: rgba(255,255,255,0.72); margin-bottom: 48px; }
+
+    .booking-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 40px;
+      background: var(--teal);
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 8px 30px rgba(11, 196, 196, 0.4);
+    }
+
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(11, 196, 196, 0.5); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 40px;
+      background: transparent;
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--white); transform: translateY(-3px); }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 48px;
+      background: linear-gradient(135deg, var(--gold), #a07840);
+      color: var(--white);
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all var(--transition);
+      box-shadow: 0 12px 36px rgba(200, 169, 110, 0.4);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-gold:hover { transform: translateY(-4px); box-shadow: 0 20px 56px rgba(200, 169, 110, 0.55); }
+
+    .store-badges { display: flex; gap: 16px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
+
+    .store-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 14px;
+      color: var(--white);
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      transition: all var(--transition);
+    }
+
+    .store-badge:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+    .store-badge--disabled { opacity: 0.42; cursor: not-allowed; pointer-events: none; filter: grayscale(1); }
+
+    .store-badge-icon { font-size: 1.6rem; }
+    .store-badge-text { text-align: left; }
+    .store-badge-sub { font-size: 0.68rem; opacity: 0.7; letter-spacing: 0.06em; display: block; }
+    .store-badge-name { font-size: 0.95rem; font-weight: 600; display: block; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); padding: 60px 5% 40px; }
+
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+
+    .footer-top { display: grid; grid-template-columns: 1.8fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo img { height: 32px; filter: brightness(0) invert(1); }
+    .footer-logo-text { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--white); }
+
+    .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 24px; }
+
+    .footer-social { display: flex; gap: 12px; }
+
+    .social-link {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all var(--transition);
+    }
+
+    .social-link:hover { background: var(--teal); color: var(--white); }
+
+    .footer-col-title { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); margin-bottom: 20px; }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+    .footer-links a { font-size: 0.86rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--blue-glow); }
+
+    .footer-biz-info {
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-biz-info p { font-size: 0.76rem; color: rgba(255,255,255,0.27); line-height: 1.7; }
+    .footer-biz-info strong { color: rgba(255,255,255,0.5); font-weight: 600; }
+
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+
+    .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+    .footer-legal { display: flex; gap: 24px; }
+    .footer-legal a { font-size: 0.8rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color var(--transition); }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ── HAMBURGER MENU ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: translateX(-8px); }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: rgba(10, 22, 40, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 8px 6% 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      z-index: 999;
+      flex-direction: column;
+    }
+
+    .nav-drawer.open { display: flex; }
+
+    .nav-drawer a {
+      color: rgba(255,255,255,0.82);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      letter-spacing: 0.04em;
+      transition: color var(--transition);
+    }
+
+    .nav-drawer a:hover { color: var(--blue-glow); }
+
+    .nav-drawer .drawer-cta {
+      margin-top: 12px;
+      padding: 16px;
+      background: var(--teal);
+      color: var(--white) !important;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600 !important;
+      border-bottom: none !important;
+    }
+
+    .nav-drawer .drawer-cta:hover { background: var(--blue-light) !important; }
+
+    /* ── COMING SOON CARD ── */
+    .dest-card.coming-soon {
+      background: var(--blue-ocean);
+      border: 1.5px dashed rgba(255,255,255,0.12);
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      cursor: default;
+    }
+
+    .dest-card.coming-soon:hover { transform: none; box-shadow: none; }
+
+    .dest-placeholder-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, rgba(13,46,90,0.9), rgba(10,22,40,0.95));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .coming-soon-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: rgba(11,196,196,0.15);
+      border: 1px solid rgba(11,196,196,0.35);
+      border-radius: 50px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-actions { justify-content: center; }
+      .hero-mockup-wrap { display: none; }
+      .partner-inner { grid-template-columns: 1fr; gap: 48px; }
+      .partner-visual { max-width: 500px; margin: 0 auto; order: -1; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .features-grid .feature-card:nth-child(7) { grid-column: auto; }
+      .value-strip-inner { grid-template-columns: repeat(2, 1fr); }
+      .value-card:nth-child(2) { border-right: none; }
+      .value-card:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.08); }
+      .value-card:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.08); border-right: none; }
+      .destinations-grid { grid-template-columns: 1fr 1fr; }
+      .dest-card:first-child { grid-column: span 2; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .app-preview-inner { grid-template-columns: 1fr; gap: 56px; }
+      .app-preview-text { text-align: center; }
+      .app-feature-list { align-items: center; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 6%; }
+      .features-grid { grid-template-columns: 1fr; }
+      .features-grid .feature-card:nth-child(7) { grid-column: auto; }
+      .destinations-grid { grid-template-columns: 1fr; }
+      .dest-card:first-child { grid-column: span 1; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .partner-commission { left: 10px; }
+      .value-strip-inner { grid-template-columns: repeat(2, 1fr); }
+      .phone-trio { gap: 12px; }
+      .phone-frame { width: 160px; }
+      .phone-frame.center-phone { width: 180px; }
+      #app-preview { padding: 72px 5%; }
+    }
+
+    @media (max-width: 480px) {
+      .phone-trio { flex-direction: column; align-items: center; }
+      .phone-frame, .phone-frame.center-phone { width: 200px; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ PARTNERSHIP TOP BANNER ═══ -->
+<div id="partnership-banner">
+  <span class="banner-badge">공식 파트너십</span>
+  BLU'IN × 보홀다이빙협회 — 보홀 공식 마케팅 파트너십 체결 🎉
+  <a href="#partnership" style="color:var(--gold);font-weight:600;text-decoration:underline;font-size:0.8rem;">자세히 보기 →</a>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <img src="BLU'IN_Logo/PNG/PNG2.png" alt="BLU'IN 로고">
+    <span class="nav-logo-text">BLU'IN</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#features">주요 기능</a></li>
+    <li><a href="#howitworks">이용 방법</a></li>
+    <li><a href="#partner">파트너</a></li>
+    <li><a href="#destinations">인기 지역</a></li>
+    <li><a href="#partnership" class="nav-partner-highlight">🤝 보홀 공식 파트너</a></li>
+    <li><a href="#booking" class="nav-cta">앱 다운로드</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- 모바일 드로어 -->
+<div class="nav-drawer" id="nav-drawer">
+  <a href="#features" class="drawer-link">주요 기능</a>
+  <a href="#howitworks" class="drawer-link">이용 방법</a>
+  <a href="#partner" class="drawer-link">파트너</a>
+  <a href="#destinations" class="drawer-link">인기 지역</a>
+  <a href="#booking" class="drawer-cta">앱 다운로드</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="bubbles" id="bubbles"></div>
+
+  <div class="hero-inner">
+    <!-- 좌측 텍스트 -->
+    <div class="hero-text">
+      <div class="hero-badge">스쿠버&amp;프리다이빙 통합 플랫폼</div>
+
+      <div class="hero-logo">
+        <img src="BLU'IN_Logo/PNG/PNG1.png" alt="BLU'IN">
+      </div>
+
+      <h1 class="hero-title">
+        Uniting the<br><em>Waves of Diving</em>
+      </h1>
+
+      <p class="hero-desc">
+        전 세계 어디서든 다이빙 버디를 찾고,<br>
+        커뮤니티에서 소통하고,<br>
+        클래스와 리조트를 예약하며<br>
+        바다를 탐험하세요.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#booking" class="btn-primary">
+          <span>앱 다운로드</span>
+          <span>→</span>
+        </a>
+        <a href="#features" class="btn-secondary">
+          <span>서비스 알아보기</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 우측 iPhone mockup -->
+    <div class="hero-mockup-wrap">
+      <div>
+        <div class="iphone-mockup">
+          <div class="iphone-notch"></div>
+          <div class="iphone-screen">
+            <div class="iphone-screen-header">
+              <div class="iphone-screen-label">BLU'IN</div>
+              <div class="iphone-screen-sub">오늘의 다이빙 🌊</div>
+            </div>
+            <div class="iphone-screen-body">
+              <div class="iphone-card">
+                <div class="iphone-card-img"></div>
+                <div class="iphone-card-line"></div>
+                <div class="iphone-card-line short"></div>
+              </div>
+              <div class="iphone-card">
+                <div class="iphone-card-dot"></div>
+                <div class="iphone-card-line"></div>
+                <div class="iphone-card-line short"></div>
+              </div>
+              <div class="iphone-card">
+                <div class="iphone-card-img"></div>
+                <div class="iphone-card-line"></div>
+                <div class="iphone-card-line short"></div>
+              </div>
+            </div>
+            <div class="iphone-bottom-bar">
+              <div class="iphone-tab active">🏠</div>
+              <div class="iphone-tab">🤝</div>
+              <div class="iphone-tab">📚</div>
+              <div class="iphone-tab">💬</div>
+              <div class="iphone-tab">👤</div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-label">App Preview — Coming 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>스크롤</span>
+  </div>
+</section>
+
+<!-- ═══ APP PREVIEW ═══ -->
+<section id="app-preview">
+  <div class="app-preview-inner">
+    <!-- 좌측 텍스트 -->
+    <div class="app-preview-text reveal">
+      <div class="section-tag" style="color:var(--blue-glow);">
+        <span style="display:block;width:24px;height:2px;background:var(--blue-glow);"></span>
+        App Preview
+      </div>
+      <h2 class="section-title" style="color:var(--white);">BLU'IN 앱을<br>미리 만나보세요</h2>
+      <p class="section-desc" style="color:rgba(255,255,255,0.58);">
+        버디 매칭부터 예약·결제·채팅까지, 하나의 앱에서.
+      </p>
+      <ul class="app-feature-list">
+        <li>버디 매칭 — 전 세계 어디서든</li>
+        <li>클래스·투어·리조트 예약</li>
+        <li>인앱 채팅 &amp; 안전 결제</li>
+        <li>다이버 커뮤니티 &amp; 로그</li>
+      </ul>
+    </div>
+
+    <div class="phone-trio">
+      <!-- Home -->
+      <div class="phone-wrap reveal">
+        <div class="phone-frame">
+          <div class="phone-notch-bar"></div>
+          <div class="phone-screen">
+            <div class="phone-screen-header">
+              <div class="phone-screen-label">Home</div>
+              <div class="phone-screen-title-text">탐색하기</div>
+            </div>
+            <div class="phone-screen-body">
+              <div class="ps-card">
+                <div class="ps-card-img"></div>
+                <div class="ps-line" style="margin-bottom:5px;"></div>
+                <div class="ps-line short"></div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-card-img"></div>
+                <div class="ps-line" style="margin-bottom:5px;"></div>
+                <div class="ps-line short"></div>
+              </div>
+            </div>
+            <div class="phone-bottom-nav">
+              <span class="phone-nav-icon active">🏠</span>
+              <span class="phone-nav-icon">🤝</span>
+              <span class="phone-nav-icon">📚</span>
+              <span class="phone-nav-icon">💬</span>
+              <span class="phone-nav-icon">👤</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label-text">Home</div>
+      </div>
+
+      <!-- Community (center) -->
+      <div class="phone-wrap reveal reveal-delay-1">
+        <div class="phone-frame center-phone">
+          <div class="phone-notch-bar"></div>
+          <div class="phone-screen">
+            <div class="phone-screen-header">
+              <div class="phone-screen-label">Community</div>
+              <div class="phone-screen-title-text">커뮤니티</div>
+            </div>
+            <div class="phone-screen-body">
+              <div class="ps-row">
+                <div class="ps-avatar"></div>
+                <div class="ps-lines">
+                  <div class="ps-line"></div>
+                  <div class="ps-line short"></div>
+                </div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-card-img" style="height:60px;"></div>
+              </div>
+              <div class="ps-row">
+                <div class="ps-avatar" style="background:rgba(200,169,110,0.3);"></div>
+                <div class="ps-lines">
+                  <div class="ps-line"></div>
+                  <div class="ps-line short"></div>
+                </div>
+              </div>
+            </div>
+            <div class="phone-bottom-nav">
+              <span class="phone-nav-icon">🏠</span>
+              <span class="phone-nav-icon">🤝</span>
+              <span class="phone-nav-icon active">📚</span>
+              <span class="phone-nav-icon">💬</span>
+              <span class="phone-nav-icon">👤</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label-text" style="color:var(--teal);">Community</div>
+      </div>
+
+      <!-- Booking -->
+      <div class="phone-wrap reveal reveal-delay-2">
+        <div class="phone-frame">
+          <div class="phone-notch-bar"></div>
+          <div class="phone-screen">
+            <div class="phone-screen-header">
+              <div class="phone-screen-label">Booking</div>
+              <div class="phone-screen-title-text">예약하기</div>
+            </div>
+            <div class="phone-screen-body">
+              <div class="ps-card">
+                <div class="ps-line" style="margin-bottom:6px;"></div>
+                <div class="ps-line short" style="margin-bottom:10px;"></div>
+                <div style="height:7px;width:100%;background:rgba(11,196,196,0.28);border-radius:4px;"></div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-line" style="margin-bottom:6px;"></div>
+                <div class="ps-line short" style="margin-bottom:10px;"></div>
+                <div style="height:7px;width:70%;background:rgba(200,169,110,0.28);border-radius:4px;"></div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-line" style="margin-bottom:6px;"></div>
+                <div class="ps-line short"></div>
+              </div>
+            </div>
+            <div class="phone-bottom-nav">
+              <span class="phone-nav-icon">🏠</span>
+              <span class="phone-nav-icon">🤝</span>
+              <span class="phone-nav-icon">📚</span>
+              <span class="phone-nav-icon active">💬</span>
+              <span class="phone-nav-icon">👤</span>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label-text">Booking</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ VALUE STRIP ═══ -->
+<section id="value-strip">
+  <div class="value-strip-inner">
+    <div class="value-card reveal">
+      <span class="value-icon">🌏</span>
+      <div class="value-title">Global Expansion Ready</div>
+      <div class="value-desc">필리핀·인도네시아·이집트·한국</div>
+    </div>
+    <div class="value-card reveal reveal-delay-1">
+      <span class="value-icon">⚡</span>
+      <div class="value-title">5 Core Experiences</div>
+      <div class="value-desc">버디·클래스·투어·리조트·커뮤니티</div>
+    </div>
+    <div class="value-card reveal reveal-delay-2">
+      <span class="value-icon">📱</span>
+      <div class="value-title">One Platform</div>
+      <div class="value-desc">예약부터 결제·채팅까지 하나의 앱</div>
+    </div>
+    <div class="value-card reveal reveal-delay-3">
+      <span class="value-icon">🚀</span>
+      <div class="value-title">2026 Launch</div>
+      <div class="value-desc">iOS &amp; Android 정식 서비스</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OFFICIAL PARTNERSHIP — 보홀다이빙협회 ═══ -->
+<section id="partnership">
+  <div class="partnership-inner">
+    <!-- 좌측 텍스트 -->
+    <div class="reveal">
+      <div class="partnership-badge">Official Marketing Partnership</div>
+      <h2 class="partnership-title">
+        보홀의 바다를<br>
+        <em>BLU'IN과 함께</em>
+      </h2>
+      <p class="partnership-desc">
+        BLU'IN은 <strong>보홀다이빙협회(Bohol Diving Association)</strong>와 공식 마케팅 파트너십을 체결했습니다.<br>
+        보홀 현지 다이빙 업계와의 직접 연결을 통해, 사용자에게 가장 신뢰할 수 있는 보홀 다이빙 경험을 제공합니다.
+      </p>
+      <ul class="partnership-benefits">
+        <li>
+          <span class="benefit-icon">🏅</span>
+          <div><strong>공식 인증 파트너</strong> — 보홀다이빙협회 승인 다이빙 샵·강사·투어를 BLU'IN에서 직접 예약</div>
+        </li>
+        <li>
+          <span class="benefit-icon">🌊</span>
+          <div><strong>보홀 전용 콘텐츠</strong> — 알로나 비치, 발리카삭, 카빌라오 등 보홀 대표 다이브 사이트 큐레이션</div>
+        </li>
+        <li>
+          <span class="benefit-icon">🤝</span>
+          <div><strong>현지 네트워크 직연결</strong> — 협회 소속 검증된 다이빙 파트너와 실시간 연결</div>
+        </li>
+        <li>
+          <span class="benefit-icon">📋</span>
+          <div><strong>협회 공동 마케팅</strong> — 보홀 다이빙 시즌 캠페인·이벤트를 BLU'IN 앱과 동시 운영</div>
+        </li>
+        <li>
+          <span class="benefit-icon">🛡️</span>
+          <div><strong>안전·품질 보장</strong> — 협회 기준을 충족한 파트너만 등록, 사용자 안전 최우선</div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- 우측 카드 -->
+    <div class="partnership-visual reveal reveal-delay-1">
+      <div class="partnership-card">
+        <div class="partner-org-name">보홀다이빙협회</div>
+        <div class="partner-org-en">Bohol Diving Association</div>
+        <p class="partner-org-desc">
+          필리핀 보홀을 대표하는 공식 다이빙 협회.<br>
+          보홀 지역 다이빙 샵, 강사, 투어 운영자를 아우르는 공인 기관으로,
+          지역 다이빙 산업의 품질 관리 및 안전 기준을 총괄합니다.
+        </p>
+        <div class="partner-org-tags">
+          <span class="partner-org-tag">필리핀 보홀</span>
+          <span class="partner-org-tag">공식 마케팅 파트너</span>
+          <span class="partner-org-tag">2026 체결</span>
+        </div>
+      </div>
+
+      <div class="partnership-stat-row">
+        <div class="partnership-stat">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">협회 소속<br>파트너</div>
+        </div>
+        <div class="partnership-stat">
+          <div class="stat-num">5</div>
+          <div class="stat-label">보홀 대표<br>다이브 사이트</div>
+        </div>
+        <div class="partnership-stat">
+          <div class="stat-num">1st</div>
+          <div class="stat-label">국내 앱<br>공식 파트너</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CORE FEATURES ═══ -->
+<section id="features" class="section">
+  <div class="features-inner">
+    <div class="features-header">
+      <div class="section-tag">Core Features</div>
+      <h2 class="section-title">다이빙에 필요한 모든 것,<br><em>한 곳에서</em></h2>
+      <p class="section-desc">
+        탐색부터 예약, 결제, 채팅까지. 끊김 없는 사용자 경험을 설계했습니다.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🤝</div>
+        <h3 class="feature-title">Buddy Matching</h3>
+        <p class="feature-desc">전 세계 어디서든 나의 다이빙 버디 찾기</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🌊</div>
+        <h3 class="feature-title">Diving Community</h3>
+        <p class="feature-desc">다이버들과 경험 공유 · 사진 및 로그 업로드 · 글로벌 다이빙 커뮤니티</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">📚</div>
+        <h3 class="feature-title">Classes</h3>
+        <p class="feature-desc">다양한 다이빙 강습 탐색 및 예약</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon">🗺️</div>
+        <h3 class="feature-title">Tours</h3>
+        <p class="feature-desc">다이빙 투어 및 원정 탐험 탐색</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">🏝️</div>
+        <h3 class="feature-title">Resorts</h3>
+        <p class="feature-desc">다이빙 리조트 탐색 및 예약</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon">💬</div>
+        <h3 class="feature-title">Chat</h3>
+        <p class="feature-desc">다이버와 파트너 간 인앱 채팅</p>
+      </div>
+
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon">💳</div>
+        <h3 class="feature-title">Payment</h3>
+        <p class="feature-desc">안전하고 투명한 결제 시스템</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="howitworks" class="section">
+  <div class="howitworks-inner">
+    <div class="howitworks-header">
+      <div class="section-tag">이용 방법</div>
+      <h2 class="section-title">탐색에서 바다까지,<br>단 몇 번의 탭</h2>
+      <p class="section-desc">
+        복잡한 검색, 따로 연락, 현금 거래는 이제 그만.
+        BLU'IN이 다이빙 여정의 모든 단계를 매끄럽게 잇습니다.
+      </p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3 class="step-title">탐색 — 내게 맞는 다이빙을 찾다</h3>
+          <p class="step-desc">지역, 날짜, 자격증 레벨, 다이빙 유형으로 필터링해 버디·클래스·투어·리조트를 한번에 검색합니다.</p>
+        </div>
+      </div>
+
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3 class="step-title">연결 — 파트너 또는 버디와 만나다</h3>
+          <p class="step-desc">마음에 드는 상품이나 버디를 선택하고, 인증된 파트너의 프로필과 리뷰를 확인하세요.</p>
+        </div>
+      </div>
+
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3 class="step-title">예약 &amp; 결제 — 즉시 또는 요청으로</h3>
+          <p class="step-desc">즉시 예약(Instant) 또는 파트너 수락 후 결제(Request) 방식으로 예약합니다. 인앱 결제로 안전하게 완결.</p>
+        </div>
+      </div>
+
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3 class="step-title">채팅 — 예약 확정 후 자동 개설</h3>
+          <p class="step-desc">결제 완료 즉시 파트너와 채팅방이 열립니다. 준비물, 집결지, 일정 변경 등 모든 소통을 앱 안에서.</p>
+        </div>
+      </div>
+
+      <div class="step reveal reveal-delay-4">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <h3 class="step-title">이용 &amp; 후기 — 경험을 나누다</h3>
+          <p class="step-desc">다이빙을 마친 뒤 후기를 남기세요. 다음 다이버를 위한 솔직한 리뷰가 커뮤니티를 풍요롭게 합니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GLOBAL PARTNERS ═══ -->
+<section id="partner" class="section">
+  <div class="partner-inner">
+    <div class="partner-text reveal">
+      <div class="section-tag">Global Partners</div>
+      <h2 class="section-title">내 다이빙 비즈니스를<br><em>글로벌로 키우세요</em></h2>
+      <p class="section-desc">
+        BLU'IN 파트너로 합류하여<br>
+        한국 및 전 세계 다이버들과 연결되고<br>
+        예약을 관리하고<br>
+        수익 기회를 확장하세요.
+      </p>
+
+      <div class="partner-types">
+        <div class="partner-type-card reveal reveal-delay-1">
+          <span class="ptype-icon">🤿</span>
+          <div class="ptype-title">Dive Shops</div>
+          <div class="ptype-desc">체험·펀다이빙·장비 렌탈 상품을 글로벌 다이버에게 노출</div>
+        </div>
+        <div class="partner-type-card reveal reveal-delay-2">
+          <span class="ptype-icon">🏝️</span>
+          <div class="ptype-title">Dive Resorts</div>
+          <div class="ptype-desc">다이빙 특화 리조트·숙박 패키지 예약 연동</div>
+        </div>
+        <div class="partner-type-card reveal reveal-delay-3">
+          <span class="ptype-icon">🏫</span>
+          <div class="ptype-title">Instructors &amp; Schools</div>
+          <div class="ptype-desc">PADI·SSI·NAUI·AIDA 강습 프로그램 등록</div>
+        </div>
+        <div class="partner-type-card reveal reveal-delay-4">
+          <span class="ptype-icon">🚤</span>
+          <div class="ptype-title">Tour Operators</div>
+          <div class="ptype-desc">당일·다박 다이빙 투어 상품 등록 및 관리</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-visual reveal reveal-delay-2">
+      <img
+        class="partner-img"
+        src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&q=80"
+        alt="파트너 다이빙 샵"
+      />
+      <div class="partner-commission">
+        <div class="commission-label">신규 파트너 수수료</div>
+        <div class="commission-rate">0%</div>
+        <div class="commission-note">프로모션 기간 적용</div>
+        <div class="commission-promo">🎉 런칭 기념 혜택</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIVE DESTINATIONS ═══ -->
+<section id="destinations" class="section">
+  <div class="destinations-inner">
+    <div class="destinations-header">
+      <div>
+        <div class="section-tag">Dive Destinations</div>
+        <h2 class="section-title">세계의 바다가<br>BLU'IN에 있습니다</h2>
+      </div>
+      <a href="#booking" class="btn-primary" style="white-space:nowrap;">전체 지역 보기 →</a>
+    </div>
+
+    <div class="destinations-grid">
+      <div class="dest-card reveal">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1578384910278-10a8bff71580?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="필리핀 보홀" />
+        <div style="position:absolute;top:14px;left:14px;z-index:3;background:rgba(200,169,110,0.92);color:#0a1628;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:50px;letter-spacing:0.08em;">★ 공식 파트너 지역</div>
+        <div class="dest-overlay">
+          <div class="dest-region">Philippines · 공식 파트너</div>
+          <div class="dest-name">보홀</div>
+          <div class="dest-count">보홀다이빙협회 인증 · 투어·리조트 예약</div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-1">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1573554249484-94e7357765be?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="세부" />
+        <div class="dest-overlay">
+          <div class="dest-region">Philippines</div>
+          <div class="dest-name">세부</div>
+          <div class="dest-count">클래스·투어 가능</div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-2">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1501963589393-2e1552dfa94a?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="발리" />
+        <div class="dest-overlay">
+          <div class="dest-region">Indonesia</div>
+          <div class="dest-name">발리</div>
+          <div class="dest-count">투어·리조트 가능</div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-1">
+        <img class="dest-img" src="https://images.unsplash.com/photo-1678284948837-45bf97e651c1?q=80&w=1494&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="제주도" />
+        <div class="dest-overlay">
+          <div class="dest-region">Korea</div>
+          <div class="dest-name">제주도</div>
+          <div class="dest-count">버디·클래스·투어 가능</div>
+        </div>
+      </div>
+
+      <div class="dest-card reveal reveal-delay-2">
+        <img class="dest-img" src="./bluehole.jpg.png" alt="이집트 다합 블루홀" />
+        <div class="dest-overlay">
+          <div class="dest-region">Egypt</div>
+          <div class="dest-name">다합 블루홀</div>
+          <div class="dest-count">클래스·투어 가능</div>
+        </div>
+      </div>
+
+      <!-- Coming Soon 지역 -->
+      <div class="dest-card coming-soon reveal reveal-delay-1">
+        <div class="dest-placeholder-img">🏖️</div>
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="dest-overlay">
+          <div class="dest-region">Maldives</div>
+          <div class="dest-name">몰디브</div>
+          <div class="dest-count">서비스 준비 중</div>
+        </div>
+      </div>
+
+      <div class="dest-card coming-soon reveal reveal-delay-2">
+        <div class="dest-placeholder-img">🌊</div>
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="dest-overlay">
+          <div class="dest-region">Palau</div>
+          <div class="dest-name">팔라우</div>
+          <div class="dest-count">서비스 준비 중</div>
+        </div>
+      </div>
+
+      <div class="dest-card coming-soon reveal reveal-delay-3">
+        <div class="dest-placeholder-img">🐠</div>
+        <div class="coming-soon-badge">Coming Soon</div>
+        <div class="dest-overlay">
+          <div class="dest-region">Japan</div>
+          <div class="dest-name">오키나와</div>
+          <div class="dest-count">서비스 준비 중</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DOWNLOAD APP ═══ -->
+<section id="booking" class="section">
+  <div class="booking-inner">
+    <div class="section-tag reveal">Download App</div>
+    <h2 class="booking-title reveal reveal-delay-1">
+      당신의 다음 다이빙,<br><em>BLU'IN에서 시작하세요</em>
+    </h2>
+    <p class="booking-desc reveal reveal-delay-2">
+      앱을 다운로드하고 오늘 바로 버디를 찾거나,<br>
+      클래스·투어·리조트를 예약해보세요.
+    </p>
+
+    <div class="booking-actions reveal reveal-delay-3">
+      <a href="#" class="btn-gold">
+        <span>🤿</span>
+        <span>지금 시작하기</span>
+      </a>
+      <a href="https://www.bluinofficial.com/landing" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+        파트너 신청하기 →
+      </a>
+    </div>
+
+    <div class="store-badges reveal reveal-delay-4">
+      <span class="store-badge store-badge--disabled" aria-disabled="true">
+        <span class="store-badge-icon">🍎</span>
+        <div class="store-badge-text">
+          <span class="store-badge-sub">Coming Soon</span>
+          <span class="store-badge-name">App Store — 출시 예정</span>
+        </div>
+      </span>
+      <a href="https://play.google.com/store/apps/details?id=com.app.bluin" class="store-badge" target="_blank" rel="noopener noreferrer">
+        <span class="store-badge-icon">▶</span>
+        <div class="store-badge-text">
+          <span class="store-badge-sub">Get it on</span>
+          <span class="store-badge-name">Google Play</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <img src="BLU'IN_Logo/PNG/PNG2.png" alt="BLU'IN">
+          <span class="footer-logo-text">BLU'IN</span>
+        </div>
+        <p class="footer-tagline">
+          스쿠버다이빙·프리다이빙 이용자와<br>
+          다이빙 파트너를 잇는 통합 예약 플랫폼.<br>
+          Uniting the Waves of Diving.
+        </p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="social-link" aria-label="YouTube">▶</a>
+          <a href="#" class="social-link" aria-label="KakaoTalk">💬</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">서비스</div>
+        <ul class="footer-links">
+          <li><a href="#features">버디 매칭</a></li>
+          <li><a href="#features">커뮤니티</a></li>
+          <li><a href="#features">클래스 예약</a></li>
+          <li><a href="#features">투어 예약</a></li>
+          <li><a href="#features">리조트 예약</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">파트너</div>
+        <ul class="footer-links">
+          <li><a href="#partner">파트너 신청</a></li>
+          <li><a href="#partner">강사 등록</a></li>
+          <li><a href="#partner">다이빙 샵</a></li>
+          <li><a href="#partner">투어 운영자</a></li>
+          <li><a href="#partner">리조트</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">회사</div>
+        <ul class="footer-links">
+          <li><a href="#">회사 소개</a></li>
+          <li><a href="#">공지사항</a></li>
+          <li><a href="#">고객센터</a></li>
+          <li><a href="#">이용약관</a></li>
+          <li><a href="#">개인정보처리방침</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-biz-info">
+      <p><strong>상호명:</strong> BLU'IN &nbsp;|&nbsp; <strong>대표자:</strong> 전재민, 이도현 &nbsp;|&nbsp; <strong>사업자등록번호:</strong> 486-47-01095</p>
+      <p><strong>주소:</strong> 서울특별시 강남구 강남대로112길 47, 2층 J350호</p>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 BLU'IN. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">이용약관</a>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">위치기반서비스</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+  /* Navbar scroll */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* Bubble generator */
+  const bubblesContainer = document.getElementById('bubbles');
+  for (let i = 0; i < 18; i++) {
+    const b = document.createElement('div');
+    b.className = 'bubble';
+    const size = Math.random() * 14 + 4;
+    b.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      animation-duration: ${Math.random() * 10 + 8}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    bubblesContainer.appendChild(b);
+  }
+
+  /* Scroll reveal */
+  const revealEls = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  /* Hamburger menu */
+  const hamburger = document.getElementById('hamburger');
+  const navDrawer = document.getElementById('nav-drawer');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    navDrawer.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navDrawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* Smooth anchor scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
