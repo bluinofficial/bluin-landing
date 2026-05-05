@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>서비스 안내 — BLU'IN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue-deep: #0a1628;
+      --blue-ocean: #0d2e5a;
+      --teal: #0bc4c4;
+      --gold: #c8a96e;
+      --white: #ffffff;
+      --off-white: #f4f8fc;
+      --gray: #8fa3b8;
+      --gray-light: #e8eef4;
+      --text-dark: #0d1b2a;
+      --text-body: #2c4057;
+      --font: 'Noto Sans KR', sans-serif;
+    }
+    body { font-family: var(--font); background: var(--off-white); color: var(--text-dark); min-height: 100vh; }
+
+    /* NAV */
+    nav {
+      background: var(--blue-deep);
+      padding: 0 5%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 36px; }
+    .nav-logo span { color: var(--white); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; }
+    .nav-back { color: var(--teal); text-decoration: none; font-size: 0.9rem; }
+    .nav-back:hover { text-decoration: underline; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-ocean));
+      padding: 80px 5% 60px;
+      text-align: center;
+      color: var(--white);
+    }
+    .hero-tag { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--teal); text-transform: uppercase; margin-bottom: 16px; }
+    .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 16px; }
+    .hero p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.7; max-width: 500px; margin: 0 auto; }
+
+    /* NOTICE */
+    .notice-bar {
+      background: rgba(11,196,196,0.1);
+      border: 1px solid rgba(11,196,196,0.3);
+      color: var(--teal);
+      text-align: center;
+      padding: 12px 5%;
+      font-size: 0.85rem;
+    }
+
+    /* SERVICES */
+    .services-section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 5%;
+    }
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 32px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--teal);
+    }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    .service-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+    .service-card-header {
+      background: linear-gradient(135deg, var(--blue-ocean), var(--blue-deep));
+      padding: 28px 24px 20px;
+      color: var(--white);
+    }
+    .service-category {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .service-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+    .service-sub { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+    .service-card-body { padding: 20px 24px 24px; }
+    .service-info { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .service-info-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; }
+    .service-info-label { color: var(--gray); }
+    .service-info-value { color: var(--text-dark); font-weight: 500; }
+    .service-price-box {
+      background: var(--off-white);
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .service-price-label { font-size: 0.8rem; color: var(--gray); }
+    .service-price { font-size: 1.3rem; font-weight: 700; color: var(--blue-deep); }
+    .service-price span { font-size: 0.85rem; font-weight: 400; color: var(--gray); margin-left: 2px; }
+    .service-badge {
+      display: inline-block;
+      background: rgba(11,196,196,0.1);
+      color: var(--teal);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 50px;
+      border: 1px solid rgba(11,196,196,0.3);
+      margin-top: 14px;
+    }
+
+    /* FOOTER NOTE */
+    .footer-note {
+      max-width: 900px;
+      margin: 0 auto 80px;
+      padding: 0 5%;
+    }
+    .footer-note-box {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px 28px;
+      border-left: 4px solid var(--gold);
+      font-size: 0.85rem;
+      color: var(--text-body);
+      line-height: 1.8;
+    }
+    .footer-note-box strong { color: var(--text-dark); }
+
+    /* FOOTER */
+    footer {
+      background: var(--blue-deep);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 32px 5%;
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+    footer a { color: rgba(255,255,255,0.45); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .service-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo/logo.png" alt="BLU'IN 로고">
+    <span>BLU'IN</span>
+  </a>
+  <a href="index.html" class="nav-back">← 홈으로</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Services</div>
+  <h1>BLU'IN 서비스 안내</h1>
+  <p>스쿠버다이빙·프리다이빙 이용자와 다이빙 파트너를 잇는 통합 예약 플랫폼 BLU'IN의 서비스를 소개합니다.</p>
+</div>
+
+<div class="notice-bar">
+  앱스토어 및 구글 플레이에서 BLU'IN을 무료로 다운로드하고 이용하실 수 있습니다.
+</div>
+
+<div class="services-section">
+  <div class="section-title">예약 서비스</div>
+  <div class="service-grid">
+
+    <!-- 스쿠버 다이빙 투어 -->
+    <div class="service-card">
+      <div class="service-card-header">
+        <div class="service-category">Tour</div>
+        <div class="service-name">스쿠버 다이빙 투어</div>
+        <div class="service-sub">Scuba Diving Tour</div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-info">
+          <div class="service-info-row">
+            <span class="service-info-label">분야</span>
+            <span class="service-info-value">스쿠버다이빙</span>
+          </div>
+          <div class="service-info-row">
+            <span class="service-info-label">인원</span>
+            <span class="service-info-value">1인 기준</span>
+          </div>
+          <div class="service-info-row">
+            <span class="service-info-label">지역</span>
+            <span class="service-info-value">국내·해외</span>
+          </div>
+        </div>
+        <div class="service-price-box">
+          <span class="service-price-label">이용 요금</span>
+          <div class="service-price">300,000<span>원~</span></div>
+        </div>
+        <div class="service-badge">앱에서 예약</div>
+      </div>
+    </div>
+
+    <!-- 프리다이빙 클래스 -->
+    <div class="service-card">
+      <div class="service-card-header">
+        <div class="service-category">Class</div>
+        <div class="service-name">프리다이빙 클래스</div>
+        <div class="service-sub">Freediving Class</div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-info">
+          <div class="service-info-row">
+            <span class="service-info-label">분야</span>
+            <span class="service-info-value">프리다이빙</span>
+          </div>
+          <div class="service-info-row">
+            <span class="service-info-label">인원</span>
+            <span class="service-info-value">1인 기준</span>
+          </div>
+          <div class="service-info-row">
+            <span class="service-info-label">지역</span>
+            <span class="service-info-value">국내·해외</span>
+          </div>
+        </div>
+        <div class="service-price-box">
+          <span class="service-price-label">이용 요금</span>
+          <div class="service-price">500,000<span>원~</span></div>
+        </div>
+        <div class="service-badge">앱에서 예약</div>
+      </div>
+    </div>
+
+    <!-- 다이빙 리조트 -->
+    <div class="service-card">
+      <div class="service-card-header">
+        <div class="service-category">Resort</div>
+        <div class="service-name">다이빙 리조트</div>
+        <div class="service-sub">Diving Resort</div>
+      </div>
+      <div class="service-card-body">
+        <div class="service-info">
+          <div class="service-info-row">
+            <span class="service-info-label">분야</span>
+            <span class="service-info-value">스쿠버·프리다이빙</span>
+          </div>
+          <div class="service-info-row">
+            <span class="service-info-label">기준</span>
+            <span class="service-info-value">1박 기준</span>
+          </div>
+          <div class="service-info-row">
+            <span class="service-info-label">지역</span>
+            <span class="service-info-value">국내·해외</span>
+          </div>
+        </div>
+        <div class="service-price-box">
+          <span class="service-price-label">이용 요금</span>
+          <div class="service-price">50,000<span>원~/박</span></div>
+        </div>
+        <div class="service-badge">앱에서 예약</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer-note">
+  <div class="footer-note-box">
+    <strong>안내사항</strong><br>
+    위 금액은 예시 기준 가격이며, 실제 이용 금액은 파트너사 및 일정에 따라 다를 수 있습니다.<br>
+    정확한 가격 및 예약은 BLU'IN 앱(iOS/Android)에서 확인하실 수 있습니다.
+  </div>
+</div>
+
+<footer>
+  <p>상호명: 블루인 &nbsp;|&nbsp; 대표자: 전재민, 이도현 &nbsp;|&nbsp; 사업자등록번호: 486-47-01095</p>
+  <p>주소: 서울특별시 강남구 강남대로112길 47, 2층 J350호 &nbsp;|&nbsp; 이메일: bluin.service@gmail.com</p>
+  <p style="margin-top:12px;">© 2026 BLU'IN. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

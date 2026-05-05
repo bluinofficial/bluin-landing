@@ -695,25 +695,25 @@
     .phone-wrap { display: flex; flex-direction: column; align-items: center; }
 
     .phone-frame {
-      width: 200px;
+      width: 240px;
       background: rgba(13, 46, 90, 0.85);
-      border-radius: 32px;
-      border: 6px solid rgba(255,255,255,0.12);
-      box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.04);
+      border-radius: 36px;
+      border: 6px solid rgba(255,255,255,0.15);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.06);
       overflow: hidden;
       transition: transform var(--transition);
     }
 
-    .phone-frame:hover { transform: translateY(-8px); }
+    .phone-frame:hover { transform: translateY(-10px); }
 
     .phone-frame.center-phone {
-      width: 224px;
-      transform: translateY(-20px);
-      border-color: rgba(11,196,196,0.45);
-      box-shadow: 0 0 0 1px rgba(11,196,196,0.2), 0 40px 80px rgba(11,196,196,0.15), 0 30px 60px rgba(0,0,0,0.4);
+      width: 270px;
+      transform: translateY(-24px);
+      border-color: rgba(11,196,196,0.55);
+      box-shadow: 0 0 0 1px rgba(11,196,196,0.25), 0 50px 100px rgba(11,196,196,0.2), 0 40px 80px rgba(0,0,0,0.5);
     }
 
-    .phone-frame.center-phone:hover { transform: translateY(-28px); }
+    .phone-frame.center-phone:hover { transform: translateY(-34px); }
 
     .phone-notch-bar {
       height: 20px;
@@ -733,7 +733,7 @@
     }
 
     .phone-screen {
-      height: 330px;
+      aspect-ratio: 9 / 19.5;
       display: flex;
       flex-direction: column;
     }
@@ -1609,38 +1609,11 @@
       <div>
         <div class="iphone-mockup">
           <div class="iphone-notch"></div>
-          <div class="iphone-screen">
-            <div class="iphone-screen-header">
-              <div class="iphone-screen-label">BLU'IN</div>
-              <div class="iphone-screen-sub">오늘의 다이빙 🌊</div>
-            </div>
-            <div class="iphone-screen-body">
-              <div class="iphone-card">
-                <div class="iphone-card-img"></div>
-                <div class="iphone-card-line"></div>
-                <div class="iphone-card-line short"></div>
-              </div>
-              <div class="iphone-card">
-                <div class="iphone-card-dot"></div>
-                <div class="iphone-card-line"></div>
-                <div class="iphone-card-line short"></div>
-              </div>
-              <div class="iphone-card">
-                <div class="iphone-card-img"></div>
-                <div class="iphone-card-line"></div>
-                <div class="iphone-card-line short"></div>
-              </div>
-            </div>
-            <div class="iphone-bottom-bar">
-              <div class="iphone-tab active">🏠</div>
-              <div class="iphone-tab">🤝</div>
-              <div class="iphone-tab">📚</div>
-              <div class="iphone-tab">💬</div>
-              <div class="iphone-tab">👤</div>
-            </div>
+          <div class="iphone-screen" style="padding:0;overflow:hidden;">
+            <img src="screenshots/그림1.png" alt="BLU'IN 앱" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
           </div>
         </div>
-        <div class="iphone-label">App Preview — Coming 2026</div>
+        <div class="iphone-label">BLU'IN App</div>
       </div>
     </div>
   </div>
@@ -1677,111 +1650,32 @@
       <div class="phone-wrap reveal">
         <div class="phone-frame">
           <div class="phone-notch-bar"></div>
-          <div class="phone-screen">
-            <div class="phone-screen-header">
-              <div class="phone-screen-label">Home</div>
-              <div class="phone-screen-title-text">탐색하기</div>
-            </div>
-            <div class="phone-screen-body">
-              <div class="ps-card">
-                <div class="ps-card-img"></div>
-                <div class="ps-line" style="margin-bottom:5px;"></div>
-                <div class="ps-line short"></div>
-              </div>
-              <div class="ps-card">
-                <div class="ps-card-img"></div>
-                <div class="ps-line" style="margin-bottom:5px;"></div>
-                <div class="ps-line short"></div>
-              </div>
-            </div>
-            <div class="phone-bottom-nav">
-              <span class="phone-nav-icon active">🏠</span>
-              <span class="phone-nav-icon">🤝</span>
-              <span class="phone-nav-icon">📚</span>
-              <span class="phone-nav-icon">💬</span>
-              <span class="phone-nav-icon">👤</span>
-            </div>
+          <div class="phone-screen" style="padding:0;overflow:hidden;">
+            <img src="screenshots/KakaoTalk_20260506_005026093.jpg" alt="BLU'IN 홈" style="width:100%;height:100%;object-fit:cover;">
           </div>
         </div>
-        <div class="phone-label-text">Home</div>
       </div>
 
       <!-- Community (center) -->
       <div class="phone-wrap reveal reveal-delay-1">
         <div class="phone-frame center-phone">
           <div class="phone-notch-bar"></div>
-          <div class="phone-screen">
-            <div class="phone-screen-header">
-              <div class="phone-screen-label">Community</div>
-              <div class="phone-screen-title-text">커뮤니티</div>
-            </div>
-            <div class="phone-screen-body">
-              <div class="ps-row">
-                <div class="ps-avatar"></div>
-                <div class="ps-lines">
-                  <div class="ps-line"></div>
-                  <div class="ps-line short"></div>
-                </div>
-              </div>
-              <div class="ps-card">
-                <div class="ps-card-img" style="height:60px;"></div>
-              </div>
-              <div class="ps-row">
-                <div class="ps-avatar" style="background:rgba(200,169,110,0.3);"></div>
-                <div class="ps-lines">
-                  <div class="ps-line"></div>
-                  <div class="ps-line short"></div>
-                </div>
-              </div>
-            </div>
-            <div class="phone-bottom-nav">
-              <span class="phone-nav-icon">🏠</span>
-              <span class="phone-nav-icon">🤝</span>
-              <span class="phone-nav-icon active">📚</span>
-              <span class="phone-nav-icon">💬</span>
-              <span class="phone-nav-icon">👤</span>
-            </div>
+          <div class="phone-screen" style="padding:0;overflow:hidden;">
+            <img src="screenshots/KakaoTalk_20260506_005026093_01.jpg" alt="BLU'IN 커뮤니티" style="width:100%;height:100%;object-fit:cover;">
           </div>
         </div>
-        <div class="phone-label-text" style="color:var(--teal);">Community</div>
       </div>
 
       <!-- Booking -->
       <div class="phone-wrap reveal reveal-delay-2">
         <div class="phone-frame">
           <div class="phone-notch-bar"></div>
-          <div class="phone-screen">
-            <div class="phone-screen-header">
-              <div class="phone-screen-label">Booking</div>
-              <div class="phone-screen-title-text">예약하기</div>
-            </div>
-            <div class="phone-screen-body">
-              <div class="ps-card">
-                <div class="ps-line" style="margin-bottom:6px;"></div>
-                <div class="ps-line short" style="margin-bottom:10px;"></div>
-                <div style="height:7px;width:100%;background:rgba(11,196,196,0.28);border-radius:4px;"></div>
-              </div>
-              <div class="ps-card">
-                <div class="ps-line" style="margin-bottom:6px;"></div>
-                <div class="ps-line short" style="margin-bottom:10px;"></div>
-                <div style="height:7px;width:70%;background:rgba(200,169,110,0.28);border-radius:4px;"></div>
-              </div>
-              <div class="ps-card">
-                <div class="ps-line" style="margin-bottom:6px;"></div>
-                <div class="ps-line short"></div>
-              </div>
-            </div>
-            <div class="phone-bottom-nav">
-              <span class="phone-nav-icon">🏠</span>
-              <span class="phone-nav-icon">🤝</span>
-              <span class="phone-nav-icon">📚</span>
-              <span class="phone-nav-icon active">💬</span>
-              <span class="phone-nav-icon">👤</span>
-            </div>
+          <div class="phone-screen" style="padding:0;overflow:hidden;">
+            <img src="screenshots/예약_결제하기_2.png" alt="BLU'IN 예약" style="width:100%;height:100%;object-fit:cover;">
           </div>
         </div>
-        <div class="phone-label-text">Booking</div>
       </div>
+      <div style="text-align:center;margin-top:16px;font-size:0.8rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em;grid-column:1/-1;">실제 블루인 어플 화면</div>
     </div>
   </div>
 </section>
@@ -2209,6 +2103,7 @@
         <div class="footer-col-title">서비스</div>
         <ul class="footer-links">
           <li><a href="#booking">앱 다운로드</a></li>
+          <li><a href="services.html">서비스 안내</a></li>
         </ul>
       </div>
 
@@ -2232,7 +2127,7 @@
     </div>
 
     <div class="footer-biz-info">
-      <p><strong>상호명:</strong> BLU'IN &nbsp;|&nbsp; <strong>대표자:</strong> 전재민, 이도현 &nbsp;|&nbsp; <strong>사업자등록번호:</strong> 486-47-01095</p>
+      <p><strong>상호명:</strong> 블루인 &nbsp;|&nbsp; <strong>대표자:</strong> 전재민, 이도현 &nbsp;|&nbsp; <strong>사업자등록번호:</strong> 486-47-01095</p>
       <p><strong>주소:</strong> 서울특별시 강남구 강남대로112길 47, 2층 J350호 &nbsp;|&nbsp; <strong>이메일:</strong> bluin.service@gmail.com</p>
     </div>
 
