@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>버그 신고 — BLU'IN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue-deep: #0a1628;
+      --blue-ocean: #0d2e5a;
+      --teal: #0bc4c4;
+      --gold: #c8a96e;
+      --white: #ffffff;
+      --off-white: #f4f8fc;
+      --gray: #8fa3b8;
+      --gray-light: #e8eef4;
+      --text-dark: #0d1b2a;
+      --text-body: #2c4057;
+      --font: 'Noto Sans KR', sans-serif;
+    }
+    body { font-family: var(--font); background: var(--off-white); color: var(--text-dark); min-height: 100vh; }
+
+    nav {
+      background: var(--blue-deep);
+      padding: 0 5%;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 36px; }
+    .nav-logo span { color: var(--white); font-weight: 700; font-size: 1.1rem; letter-spacing: 0.05em; }
+    .nav-back { color: var(--teal); text-decoration: none; font-size: 0.9rem; }
+    .nav-back:hover { text-decoration: underline; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--blue-deep), var(--blue-ocean));
+      padding: 80px 5% 60px;
+      text-align: center;
+      color: var(--white);
+    }
+    .hero-tag { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--teal); text-transform: uppercase; margin-bottom: 16px; }
+    .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: 16px; }
+    .hero p { color: rgba(255,255,255,0.65); font-size: 0.95rem; line-height: 1.7; max-width: 480px; margin: 0 auto; }
+
+    .main { max-width: 720px; margin: 60px auto 80px; padding: 0 5%; }
+
+    .info-box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 32px;
+      border-left: 4px solid var(--teal);
+      font-size: 0.88rem;
+      color: var(--text-body);
+      line-height: 1.8;
+    }
+    .info-box strong { color: var(--text-dark); }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 36px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+    .form-card h2 { font-size: 1.2rem; font-weight: 700; margin-bottom: 28px; color: var(--text-dark); }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--gray-light);
+      border-radius: 10px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: var(--off-white);
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { outline: none; border-color: var(--teal); background: var(--white); }
+    .form-group textarea { resize: vertical; min-height: 140px; }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover { background: #09aFaF; transform: translateY(-2px); }
+
+    #successMsg {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    }
+    #successMsg .check { font-size: 3rem; margin-bottom: 16px; }
+    #successMsg h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+    #successMsg p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+    footer {
+      background: var(--blue-deep);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 32px 5%;
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .form-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo/logo.png" alt="BLU'IN 로고">
+    <span>BLU'IN</span>
+  </a>
+  <a href="index.html" class="nav-back">← 홈으로</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Bug Report</div>
+  <h1>버그 및 오류 신고</h1>
+  <p>앱 이용 중 불편한 점이나 오류를 발견하셨나요? 자세히 알려주시면 빠르게 확인하겠습니다.</p>
+</div>
+
+<div class="main">
+  <div class="info-box">
+    <strong>신고 전 확인해주세요</strong><br>
+    • 앱을 최신 버전으로 업데이트한 후에도 동일한 문제가 발생하는지 확인해주세요.<br>
+    • 기기 재시작 후에도 동일한 오류가 발생하면 신고해주세요.<br>
+    • 접수된 내용은 검토 후 순차적으로 처리되며, 필요 시 이메일로 안내드립니다.
+  </div>
+
+  <div class="form-card" id="formWrap">
+    <h2>버그 신고서</h2>
+    <form name="bug-report" netlify netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+      <input type="hidden" name="form-name" value="bug-report">
+      <p style="display:none"><input name="bot-field"></p>
+
+      <div class="form-group">
+        <label>이름</label>
+        <input type="text" name="name" placeholder="이름을 입력해주세요" required>
+      </div>
+      <div class="form-group">
+        <label>이메일 *</label>
+        <input type="email" name="email" placeholder="답변받을 이메일 주소" required>
+      </div>
+      <div class="form-group">
+        <label>사용 기기 *</label>
+        <select name="device" required>
+          <option value="" disabled selected>선택해주세요</option>
+          <option value="iPhone">iPhone (iOS)</option>
+          <option value="Android">Android</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>오류 유형 *</label>
+        <select name="bug-type" required>
+          <option value="" disabled selected>선택해주세요</option>
+          <option value="앱 실행 오류">앱 실행/충돌 오류</option>
+          <option value="예약/결제 오류">예약/결제 오류</option>
+          <option value="로그인 오류">로그인 오류</option>
+          <option value="채팅 오류">채팅 오류</option>
+          <option value="화면 표시 오류">화면 표시 오류</option>
+          <option value="기타">기타</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>오류 내용 *</label>
+        <textarea name="message" placeholder="어떤 상황에서 오류가 발생했는지 자세히 설명해주세요." required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">신고 제출하기</button>
+    </form>
+  </div>
+
+  <div id="successMsg">
+    <div class="check">✅</div>
+    <h3>신고가 접수됐습니다</h3>
+    <p>소중한 피드백 감사합니다.<br>검토 후 필요 시 입력하신 이메일로 안내드리겠습니다.</p>
+  </div>
+</div>
+
+<footer>
+  <p>상호명: 블루인 &nbsp;|&nbsp; 대표자: 전재민, 이도현 &nbsp;|&nbsp; 사업자등록번호: 486-47-01095</p>
+  <p>주소: 서울특별시 강남구 강남대로112길 47, 2층 J350호 &nbsp;|&nbsp; 광고·협력 문의: bluin.service@gmail.com</p>
+  <p style="margin-top:12px;">© 2026 BLU'IN. All rights reserved.</p>
+</footer>
+
+<script>
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString(),
+      });
+      document.getElementById("formWrap").style.display = "none";
+      document.getElementById("successMsg").style.display = "block";
+    } catch (err) {
+      alert("오류가 발생했습니다. 다시 시도해주세요.");
+    }
+  }
+</script>
+</body>
+</html>
